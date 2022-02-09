@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import GithubContext from '../../context/github/GithubContext';
 
 function UserSearch() {
   const [text, setText] = useState('');
+
+  const { users, searchUsers, clearUsers } = useContext(GithubContext);
 
   const handleChange = (e) => setText(e.target.value);
 
@@ -10,6 +13,10 @@ function UserSearch() {
 
     if (text === '') {
       alert('Please enter something!');
+    } else {
+      searchUsers(text);
+
+      setText('');
     }
   };
 
@@ -37,7 +44,11 @@ function UserSearch() {
         </form>
       </div>
       <div>
-        <button className='btn btn-ghost btn-lg'>Clear</button>
+        {users.length > 0 && (
+          <button onClick={clearUsers} className='btn btn-ghost btn-lg'>
+            Clear
+          </button>
+        )}
       </div>
     </div>
   );
