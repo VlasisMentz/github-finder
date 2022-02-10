@@ -10,7 +10,7 @@ export const AlertProvider = ({ children }) => {
 
   const setAlert = (msg, type) => {
     dispatch({
-      typer: 'SET_ALERT',
+      type: 'SET_ALERT',
       payload: { msg, type },
     });
 
@@ -18,7 +18,7 @@ export const AlertProvider = ({ children }) => {
   };
 
   return (
-    <AlertContext.Provider value={{ alert: state }}>
+    <AlertContext.Provider value={{ alert: state, setAlert }}>
       {children}
     </AlertContext.Provider>
   );
